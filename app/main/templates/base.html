@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Able</title>
+
+  <!-- Google Font: Source Sans Pro
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome/all.min.css') }} ">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/icheck-bootstrap.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/adminlte.min.css') }} ">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/tagsinput/css/bootstrap-tagsinput.css') }}">
+   <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/daterangepicker/daterangepicker.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/dropzone/dropzone.css') }} ">
+
+  <!-- custom style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/main.css') }} ">
+</head>
+
+<body class="hold-transition layout-top-nav">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white p-0">
+      <div class="container">
+        <a href="/" title="홈화면 이동" class="navbar-brand">
+
+          <span class="brand-text font-weight-bold">
+            Able
+          </span>
+        </a>
+        {% include 'nav.html' %}
+      </div>
+    </nav>
+
+    <!-- Content Wrapper. Contains page content -->
+
+
+
+    <div class="content-wrapper">
+      {% block content %}
+
+
+      {% endblock %}
+    </div>
+    <!-- /.content-wrapper -->
+
+
+  </div>
+  <!-- ./wrapper -->
+
+
+  <!-- REQUIRED SCRIPTS -->
+
+  <!-- jQuery -->
+  <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }} "></script>
+  <script src="{{ url_for('static', filename='plugins/chart.js/Chart.min.js') }}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="{{ url_for('static', filename='plugins/bootstrap/bootstrap.bundle.min.js') }}"></script>
+  <!-- AdminLTE App -->
+  <script src="{{ url_for('static', filename='dist/js/adminlte.min.js') }} "></script>
+
+  <script src="{{ url_for('static', filename='plugins/select2/js/select2.full.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='plugins/tagsinput/js/bootstrap-tagsinput.min.js') }}"></script>
+
+  <!-- InputMask -->
+  <script src="{{ url_for('static', filename='plugins/moment/moment.min.js') }} "></script>
+  <script src="{{ url_for('static', filename='plugins/moment/locale/ko.js') }} "></script>
+  <script src="{{ url_for('static', filename='plugins/inputmask/jquery.inputmask.min.js') }} "></script>
+  <!-- date-range-picker -->
+  <script src="{{ url_for('static', filename='plugins/daterangepicker/daterangepicker.js') }} "></script>
+
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="{{ url_for('static', filename='plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='dist/js/common.js') }} "></script>
+  <script src="{{ url_for('static', filename='plugins/dropzone/dropzone.js') }} "></script>
+  <script src="{{ url_for('static', filename='dist/js/main.js') }} "></script>
+</body>
+
+</html>

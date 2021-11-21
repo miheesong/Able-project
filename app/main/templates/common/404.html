@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}} | Able</title>
+
+  <!-- Google Font: Source Sans Pro
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome/all.min.css') }} ">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/icheck-bootstrap.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/adminlte.min.css') }} ">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/tagsinput/css/bootstrap-tagsinput.css') }}">
+  <!-- custom style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/main.css') }} ">
+</head>
+
+<body class="hold-transition layout-top-nav">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <!-- <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+      <div class="container">
+        <a href="/" class="navbar-brand">
+          <img src="{{ url_for('static', filename='dist/img/ci_symbol_s.png') }}" alt="AdminLTE Logo"
+            class="brand-image " style="opacity: .8">
+          <span class="brand-text font-weight-light">
+            음원-권리정보 통합 서비스
+          </span>
+        </a>
+      </div>
+    </nav> -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>404 Error</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="error-page">
+        <h2 class="headline text-warning"> 404</h2>
+
+        <div class="error-content">
+          <h3><i class="fas fa-exclamation-triangle text-warning"></i>요청하신 페이지를 찾을 수 없습니다.</h3>
+
+          <!-- <p>
+            We could not find the page you were looking for.
+            Meanwhile, you may <a href="/">return to dashboard</a> or try using the search form.
+          </p> -->
+        </div>
+        <!-- /.error-content -->
+      </div>
+      <!-- /.error-page -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <footer class="main-footer">
+    <!-- To the right -->
+    <!-- Default to the left -->
+    <strong>Copyright &copy;. All rights reserved.</strong>
+  </footer>
+</div>
+
+
+  <!-- REQUIRED SCRIPTS -->
+
+  <!-- jQuery -->
+  <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }} "></script>
+  <script src="{{ url_for('static', filename='plugins/chart.js/Chart.min.js') }}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="{{ url_for('static', filename='plugins/bootstrap/bootstrap.bundle.min.js') }}"></script>
+  <!-- AdminLTE App -->
+  <script src="{{ url_for('static', filename='dist/js/adminlte.min.js') }} "></script>
+
+  <script src="{{ url_for('static', filename='plugins/select2/js/select2.full.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='plugins/tagsinput/js/bootstrap-tagsinput.min.js') }}"></script>
+
+  <!-- InputMask -->
+  <script src="{{ url_for('static', filename='plugins/inputmask/jquery.inputmask.min.js') }} "></script>
+  <!-- date-range-picker -->
+  <script src="{{ url_for('static', filename='plugins/daterangepicker/daterangepicker.js') }} "></script>
+
+  <script src="{{ url_for('static', filename='dist/js/common.js') }} "></script>
+  <script src="{{ url_for('static', filename='dist/js/main.js') }} "></script>
+</body>
+
+</html>
