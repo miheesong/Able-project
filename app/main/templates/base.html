@@ -27,6 +27,11 @@
 
   <!-- custom style -->
   <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/main.css') }} ">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/board-detail.css') }} ">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/clubstyle.css') }} ">
+
+  <link rel="shortcut icon" href="#">
+
 </head>
 
 <body class="hold-transition layout-top-nav">
@@ -66,6 +71,7 @@
   <!-- jQuery -->
   <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }} "></script>
   <script src="{{ url_for('static', filename='plugins/chart.js/Chart.min.js') }}"></script>
+
   <!-- Bootstrap 4 -->
   <script src="{{ url_for('static', filename='plugins/bootstrap/bootstrap.bundle.min.js') }}"></script>
   <!-- AdminLTE App -->
@@ -74,6 +80,8 @@
   <script src="{{ url_for('static', filename='plugins/select2/js/select2.full.min.js') }}"></script>
   <script src="{{ url_for('static', filename='plugins/tagsinput/js/bootstrap-tagsinput.min.js') }}"></script>
 
+
+  <script src="{{ url_for('static', filename='dist/js/main.js') }} "></script>
   <!-- InputMask -->
   <script src="{{ url_for('static', filename='plugins/moment/moment.min.js') }} "></script>
   <script src="{{ url_for('static', filename='plugins/moment/locale/ko.js') }} "></script>
@@ -85,7 +93,6 @@
   <script src="{{ url_for('static', filename='plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
   <script src="{{ url_for('static', filename='dist/js/common.js') }} "></script>
   <script src="{{ url_for('static', filename='plugins/dropzone/dropzone.js') }} "></script>
-  <script src="{{ url_for('static', filename='dist/js/main.js') }} "></script>
 </body>
 
 </html>

@@ -2,9 +2,7 @@
 
 {% block content %}
 
-
-
-
+<meta charset="UTF-8"/>
 
 <div class="content-wrapper flex justify-content-center align-items-center login-container flex-direction-column">
   <section class="container main-container">
@@ -12,9 +10,110 @@
       <div class="col-12">
 
       </div>
-<!--     여기가 메인페이지-->
-    </div>
+        <!--여기가 메인페이지-->
 
+        <!--writing-->
+        <div class="writing">
+            <h2>장애인 생활체육 동호회 모아보기</h2>
+            <div class = "writing_text">대한장애인체육회 데이터를 바탕으로 제공하는 정보입니다.</div>
+            <!--강좌 홍보 데이터 불러올 공간-->
+            <ul id="club_main" class = "club_text">
+                <li class = "board1 cursor-pointer" data-bdid="{{board.loc[1]['CLUB_NM']}}+{{board.loc[1]['OPER_TIME_CN']}}">
+                    <div class ="board1_image">
+                        <img src ="../static/image/인라인스케이트.jpg"/>
+                    </div>
+                    <div class = "board1_text">
+                        {% for x in column_list %}
+                        <div>{{board.loc[1,x]}}</div>
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class = "board2 cursor-pointer" data-bdid="{{board.loc[2]['CLUB_NM']}}+{{board.loc[2]['OPER_TIME_CN']}}">
+                    <div class ="board2_image">
+                        <img src ="../static/image/등산.jpg"/>
+                    </div>
+                    <div class = "board2_text">
+                        {% for x in column_list %}
+                        <div>{{board.loc[2,x]}}</div>
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class = "board3 cursor-pointer"  data-bdid="{{board.loc[3]['CLUB_NM']}}+{{board.loc[3]['OPER_TIME_CN']}}">
+                    <div class ="board3_image">
+                        <img src ="../static/image/자전거.jpg"/>
+                    </div>
+                    <div class = "board3_text">
+                        {% for x in column_list %}
+                        <div>{{board.loc[3,x]}}</div>
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class = "board4 cursor-pointer" data-bdid="{{board.loc[4]['CLUB_NM']}}+{{board.loc[4]['OPER_TIME_CN']}}">
+                    <div class ="board4_image">
+                        <img src ="../static/image/요가.jpg"/>
+                    </div>
+                    <div class = "board4_text">
+                        {% for x in column_list %}
+                        <div>{{board.loc[4,x]}}</div>
+                        {% endfor %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+          <!--rank-->
+          <div class="rank">
+            <div class="rank_content">
+                <h2>장애인 스포츠 인기 순위</h2>
+                <div class="rank_text">국민체육진흥공단 데이터를 바탕으로<br />제공하는 순위입니다.</div>
+            </div>
+              <!--순위 데이터 불러올 공간-->
+              <div class="rank_table">
+                  <div class="rank_table1">
+                      <div class="card">
+                        <div class="card-body p-0">
+                          <table class = "table">
+                            <tbody>
+                            {% for key, value in rank.iterrows() %}
+                            {% if loop.index <= 5 %}
+                            <tr>
+                              {% if loop.index <=3 %}
+                                <td class="rank_red">{{value['DMAND_MVM_ITEM_IDEX_RANK_CO']}}</td>
+                                <td class="bold_large">{{value['DMAND_MVM_ITEM_SCLAS_NM']}}</td>
+                              {% else %}
+                                <td>{{value['DMAND_MVM_ITEM_IDEX_RANK_CO']}}</td>
+                                <td>{{value['DMAND_MVM_ITEM_SCLAS_NM']}}</td>
+                              {% endif %}
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="rank_table2">
+                      <div class="card">
+                        <div class="card-body p-0">
+                          <table class = "table">
+                            <tbody>
+                            {% for key, value in rank.iterrows() %}
+                            {% if loop.index >= 6 %}
+                            <tr>
+                                <td>{{value['DMAND_MVM_ITEM_IDEX_RANK_CO']}}</td>
+                                <td>{{value['DMAND_MVM_ITEM_SCLAS_NM']}}</td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+    </div>
   </section>
 </div>
 

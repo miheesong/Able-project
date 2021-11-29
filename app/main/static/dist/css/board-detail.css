@@ -1,0 +1,35 @@
+/* 홍보게시글 상세페이지 */
+.current-page {
+  padding-top: 3rem!important;
+  padding-bottom: 2rem!important;
+  border-bottom: 2px solid #c9caca;
+}
+.club_header {
+  position: relative;
+  border-bottom: 1px solid #c9caca;
+}
+
+.tg_list {
+  display: flex;
+  padding-left: 10px;
+}
+
+.tg_club {
+  border: 2px solid rgb(0, 73, 140);
+  vertical-align: middle;
+  float: left;
+  padding: 7px;
+  border-radius: 15px;
+  background: rgb(0, 73, 140);
+  color: #fff;
+  font-weight: bold;
+  margin-right : 10px;
+}
+
+.content-img-wrap img {
+  width: 70%;
+}
+
+.content h5 {
+  line-height: normal;
+}

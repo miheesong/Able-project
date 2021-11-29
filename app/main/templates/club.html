@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <div class = "club-page">
+                <!--header-->
+            <!--<div class = "header">
+                <ul class = "nav">
+                    &lt;!&ndash; navigation bar&ndash;&gt;
+                    <li><a href = "/club">동호회</a></li>
+                    <li><a href = "#">체육시설</a></li>
+                </ul>
+                <div class = "title">
+                    <h1><a href = "/">Able</a></h1>
+                </div>
+            </div>-->
+            <!--동호회 조회하기-->
+<!--            <div class = "content">-->
+                <div>
+                    <h1 class = "intro_text">동호회 조회하기</h1>
+                </div>
+                <!--areaBased-->
+                <form class = "condition" method = "POST" action = "/filter">
+                    <ul class = "selecting">
+                        <div>
+                            <label for = "area-select">시/도</label>
+                            <select name = "areas" id="area-select">
+                                <option value = "">전체</option>
+                                <option value = "서울">서울</option>
+                                <option value = "인천">인천</option>
+                                <option value = "경기">경기</option>
+                                <option value = "대전">대전</option>
+                                <option value = "광주">광주</option>
+                                <option value = "대구">대구</option>
+                                <option value = "울산">울산</option>
+                                <option value = "부산">부산</option>
+                                <option value = "세종">세종</option>
+                                <option value = "강원">강원</option>
+                                <option value = "충북">충북</option>
+                                <option value = "충남">충남</option>
+                                <option value = "전북">전북</option>
+                                <option value = "전남">전남</option>
+                                <option value = "경북">경북</option>
+                                <option value = "경남">경남</option>
+                                <option value = "제주">제주</option>
+                            </select>
+                        </div>
+                 <!--sportBased-->
+                        <div>
+                            <label fo r= "sport-select">종목</label>
+                            <select name = "sports" id = "sport-select">
+                                <option value = "">전체</option>
+                                <option value = "검도">검도</option>
+                                <option value = "게이트볼">게이트볼</option>
+                                <option value = "골볼">골볼</option>
+                                <option value = "농구">농구</option>
+                                <option value = "당구">당구</option>
+                                <option value = "댄스스포츠">댄스스포츠</option>
+                                <option value = "럭비">럭비</option>
+                                <option value = "론볼">론볼</option>
+                                <option value = "바둑">바둑</option>
+                                <option value = "배구">배구</option>
+                                <option value = "배드민턴">배드민턴</option>
+                                <option value = "보치아">보치아</option>
+                                <option value = "볼링">볼링</option>
+                                <option value = "사이클">사이클</option>
+                                <option value = "수영">수영</option>
+                                <option value = "슐런">슐런</option>
+                                <option value = "승마">승마</option>
+                                <option value = "아이스하키">아이스하키</option>
+                                <option value = "아이스슬레지하키">아이스슬레지하키</option>
+                                <option value = "야구소프트볼">야구소프트볼</option>
+                                <option value = "양궁">양궁</option>
+                                <option value = "역도">역도</option>
+                                <option value = "육상">육상</option>
+                                <option value = "조정">조정</option>
+                                <option value = "축구">축구</option>
+                                <option value = "컬링">컬링</option>
+                                <option value = "탁구">탁구</option>
+                                <option value = "태권도">태권도</option>
+                                <option value = "테니스">테니스</option>
+                                <option value = "파워싸커">파워싸커</option>
+                                <option value = "파크골프">파크골프</option>
+                                <option value = "펜싱">펜싱</option>
+                            </select>
+                        </div>
+                    </ul>
+                <!--nameSearch-->
+                    <ul class = "searching">
+                        <li>동호회 이름</li>
+                        <div>
+                            <input type = "search" name = "name" placeholder = "이름을 입력하세요">
+                            <button class = "검색" type = "submit" >검색</button>
+                        </div>
+                    </ul>
+                </form>
+
+            </div>
+            <!-- excel data print -->
+            <div>
+                <center>
+                    <table class = "table" border = "1" align = "center">
+                        <th>시/도</th>
+                        <th>시군구</th>
+                        <th>종목</th>
+                        <th>장애유형</th>
+                        <th>동호회명</th>
+                        <tbody>
+                            {% for key, value in club_info.iterrows() %}
+                            <tr>
+                                <td>{{value['CTPRVN_NM']}}</td>
+                                <td>{{value['SIGNGU_NM']}}</td>
+                                <td>{{value['ITEM_NM']}}</td>
+                                <td>{{value['TROBL_TY_NM']}}</td>
+                                <td>{{value['CLUB_NM']}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </center>
+            </div>
+        </div>
+
+{% endblock %}
