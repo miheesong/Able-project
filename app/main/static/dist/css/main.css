@@ -86,7 +86,77 @@ body {
   color: black;
   text-decoration: none;
 }
-
+.hide{display:none;}
+.gnb{
+  float:left;
+  /* width:calc(100% - 258px); */
+}
+/* .gnb > ul > li > a:hover, #gnb > ul > li > a.on {
+  color: #fff;
+  background: #2380c2;
+} */
+.gnb-ul:after{content:"";display:block;clear:both;}
+.gnb-ul > li{
+  position:relative;
+  float:left;
+  /* padding:15px 55px 13px 0; */
+  text-align:left;
+}
+.gnb-ul > li > a{
+  /* display:inline-block;
+  position:relative;
+  padding:0 0 5px 0;
+  font-weight:300;
+  font-size:16px;
+  color:#000; */
+  display: block;
+  line-height: 12px;
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  font-size: 25px;
+  padding: 23px;
+  color: #353535;
+  width: 150px;
+}
+.gnb-ul > li > a:after{display:none;content:"";position:absolute;left:0;bottom:-4px;width:100%;height:3px;background-color:#fff;}
+.gnb-ul > li:hover > a{ color :#0060e2; }
+.gnb-ul > li:hover > a:after{display:block;}
+.gnb-ul > li:first-of-type .sub-mn{right:auto;}
+.gnb-ul .gnb-inner{display:none;}
+.gnb-ul > li:hover > .sub-mn{display:block;}
+.sub-mn{
+  display: none;
+  background-color: #1b3a6a;
+  position: absolute;
+  z-index: 20;
+  top: 60px;
+  /* padding: 21px 24px 24px 21px; */
+  /* min-width: 200px; */
+  height: 100px;
+  width: 100%;
+  background-color: #ececec;
+  text-align: left;
+  box-sizing: border-box;
+  background-color: #1b3a6a;
+  color: #fff;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 10px 0;
+}
+.sub-mn > li{
+  padding: 10px 10px;
+  text-align: center;
+}
+.sub-mn > li:last-of-type{margin:0;}
+.sub-mn > li > a{
+  position:relative;
+  font-weight:400;
+  font-size:15px;
+  color:#fff;
+}
+.sub-mn > li > a:hover{color:#78f8ff;}
+.sub-mn > li > a:hover:after{content:"";display:block;position:absolute;bottom:0;left:0;width:100%;height:1px;background-color:#0060e2;}
 /*상단 흰색 탭*/
 .wrapper > nav {
     width:100%;
@@ -108,14 +178,17 @@ body {
 
 
 /*nav tab*/
-.nav {
+/*.nav {
   display: flex;
   width: 250px;
 }
 
 .nav > li {
   margin-top:30px;
-  margin-right: 30px;
+  margin-right: 0px;
+}
+.nav > li:nth-child(1) {
+  margin-right: 60px;
 }
 
 .nav > li > a {
@@ -123,7 +196,7 @@ body {
   font-weight: bold;
   font-color: black;
   cursor: pointer;
-}
+}*/
 
 
 /*promotion tab*/
@@ -252,4 +325,8 @@ body {
 
 .bold_large {
   font-weight: bold;
+}
+
+.top28 {
+  top: 28px;
 }

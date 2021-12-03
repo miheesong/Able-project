@@ -49,17 +49,17 @@
         align-items: center;
     }*/
     /* 동호회 조회 큰 덩어리 */
-    .content{
+   /* .content{
     text-align:center;
     width : 800px;
     margin : 80px auto auto auto;
     }
-    /* 동호회 조회하기 제목*/
+    *//* 동호회 조회하기 제목*//*
     .content >  h1 {
     width : 237px;
     height : 50px;
     font-size : 35px;
-    }
+    }*/
     /* 조건 필터링 해서 검색 (파이썬으로 넘겨서 처리)*/
     .condition{
         width : 800px;
@@ -103,10 +103,10 @@
         background: rgba(0,73,140,1);
     }
     /* 결과 뿌려줄 테이블*/
-    .table{
+  /*  .table-club{
     margin : 50px auto auto auto;
     width : 800px;
-    }
+    }*/
 
 
 

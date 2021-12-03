@@ -2,123 +2,195 @@
 
 {% block content %}
 
-        <div class = "club-page">
-                <!--header-->
-            <!--<div class = "header">
-                <ul class = "nav">
-                    &lt;!&ndash; navigation bar&ndash;&gt;
-                    <li><a href = "/club">동호회</a></li>
-                    <li><a href = "#">체육시설</a></li>
-                </ul>
-                <div class = "title">
-                    <h1><a href = "/">Able</a></h1>
-                </div>
-            </div>-->
-            <!--동호회 조회하기-->
-<!--            <div class = "content">-->
-                <div>
-                    <h1 class = "intro_text">동호회 조회하기</h1>
-                </div>
-                <!--areaBased-->
-                <form class = "condition" method = "POST" action = "/filter">
-                    <ul class = "selecting">
-                        <div>
-                            <label for = "area-select">시/도</label>
-                            <select name = "areas" id="area-select">
-                                <option value = "">전체</option>
-                                <option value = "서울">서울</option>
-                                <option value = "인천">인천</option>
-                                <option value = "경기">경기</option>
-                                <option value = "대전">대전</option>
-                                <option value = "광주">광주</option>
-                                <option value = "대구">대구</option>
-                                <option value = "울산">울산</option>
-                                <option value = "부산">부산</option>
-                                <option value = "세종">세종</option>
-                                <option value = "강원">강원</option>
-                                <option value = "충북">충북</option>
-                                <option value = "충남">충남</option>
-                                <option value = "전북">전북</option>
-                                <option value = "전남">전남</option>
-                                <option value = "경북">경북</option>
-                                <option value = "경남">경남</option>
-                                <option value = "제주">제주</option>
-                            </select>
-                        </div>
-                 <!--sportBased-->
-                        <div>
-                            <label fo r= "sport-select">종목</label>
-                            <select name = "sports" id = "sport-select">
-                                <option value = "">전체</option>
-                                <option value = "검도">검도</option>
-                                <option value = "게이트볼">게이트볼</option>
-                                <option value = "골볼">골볼</option>
-                                <option value = "농구">농구</option>
-                                <option value = "당구">당구</option>
-                                <option value = "댄스스포츠">댄스스포츠</option>
-                                <option value = "럭비">럭비</option>
-                                <option value = "론볼">론볼</option>
-                                <option value = "바둑">바둑</option>
-                                <option value = "배구">배구</option>
-                                <option value = "배드민턴">배드민턴</option>
-                                <option value = "보치아">보치아</option>
-                                <option value = "볼링">볼링</option>
-                                <option value = "사이클">사이클</option>
-                                <option value = "수영">수영</option>
-                                <option value = "슐런">슐런</option>
-                                <option value = "승마">승마</option>
-                                <option value = "아이스하키">아이스하키</option>
-                                <option value = "아이스슬레지하키">아이스슬레지하키</option>
-                                <option value = "야구소프트볼">야구소프트볼</option>
-                                <option value = "양궁">양궁</option>
-                                <option value = "역도">역도</option>
-                                <option value = "육상">육상</option>
-                                <option value = "조정">조정</option>
-                                <option value = "축구">축구</option>
-                                <option value = "컬링">컬링</option>
-                                <option value = "탁구">탁구</option>
-                                <option value = "태권도">태권도</option>
-                                <option value = "테니스">테니스</option>
-                                <option value = "파워싸커">파워싸커</option>
-                                <option value = "파크골프">파크골프</option>
-                                <option value = "펜싱">펜싱</option>
-                            </select>
-                        </div>
-                    </ul>
-                <!--nameSearch-->
-                    <ul class = "searching">
-                        <li>동호회 이름</li>
-                        <div>
-                            <input type = "search" name = "name" placeholder = "이름을 입력하세요">
-                            <button class = "검색" type = "submit" >검색</button>
-                        </div>
-                    </ul>
-                </form>
+<div class="content-wrapper flex justify-content-center align-items-center login-container flex-direction-column">
+  <section class="container main-container">
+    <div class="club-page">
+      <div class="current-page">
+        <h2 class="display-5 pl-3">동호회 게시판</h2>
+      </div>
+      <!--areaBased-->
+      <div class="col-12 mt-4">
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="area-select" class="pl-1">시/도</label>
+              <select class="custom-select d-block w-100" name="areas" id="area-select">
+                <option value="">전체</option>
+                <option value="서울">서울</option>
+                <option value="인천">인천</option>
+                <option value="경기">경기</option>
+                <option value="대전">대전</option>
+                <option value="광주">광주</option>
+                <option value="대구">대구</option>
+                <option value="울산">울산</option>
+                <option value="부산">부산</option>
+                <option value="세종">세종</option>
+                <option value="강원">강원</option>
+                <option value="충북">충북</option>
+                <option value="충남">충남</option>
+                <option value="전북">전북</option>
+                <option value="전남">전남</option>
+                <option value="경북">경북</option>
+                <option value="경남">경남</option>
+                <option value="제주">제주</option>
+              </select>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="sport-select" class="pl-1">종목</label>
+              <select name="sports" id="sport-select" class="custom-select d-block w-100">
+                <option value="">전체</option>
+                <option value="검도">검도</option>
+                <option value="게이트볼">게이트볼</option>
+                <option value="골볼">골볼</option>
+                <option value="농구">농구</option>
+                <option value="당구">당구</option>
+                <option value="댄스스포츠">댄스스포츠</option>
+                <option value="럭비">럭비</option>
+                <option value="론볼">론볼</option>
+                <option value="바둑">바둑</option>
+                <option value="배구">배구</option>
+                <option value="배드민턴">배드민턴</option>
+                <option value="보치아">보치아</option>
+                <option value="볼링">볼링</option>
+                <option value="사이클">사이클</option>
+                <option value="수영">수영</option>
+                <option value="슐런">슐런</option>
+                <option value="승마">승마</option>
+                <option value="아이스하키">아이스하키</option>
+                <option value="아이스슬레지하키">아이스슬레지하키</option>
+                <option value="야구소프트볼">야구소프트볼</option>
+                <option value="양궁">양궁</option>
+                <option value="역도">역도</option>
+                <option value="육상">육상</option>
+                <option value="조정">조정</option>
+                <option value="축구">축구</option>
+                <option value="컬링">컬링</option>
+                <option value="탁구">탁구</option>
+                <option value="태권도">태권도</option>
+                <option value="테니스">테니스</option>
+                <option value="파워싸커">파워싸커</option>
+                <option value="파크골프">파크골프</option>
+                <option value="펜싱">펜싱</option>
+              </select>
+          </div>
+          <div class="col-md-5 mb-3">
+            <div class="input-group top28">
+              <input class="form-control" type="search" name="name" placeholder="클럽명을 입력하세요">
+              <div class="input-group-append">
+               <button class="btn btn-secondary" id="btn-search-club" type="button">검색</button>
+              </div>
+            </div>
 
-            </div>
-            <!-- excel data print -->
-            <div>
-                <center>
-                    <table class = "table" border = "1" align = "center">
-                        <th>시/도</th>
-                        <th>시군구</th>
-                        <th>종목</th>
-                        <th>장애유형</th>
-                        <th>동호회명</th>
-                        <tbody>
-                            {% for key, value in club_info.iterrows() %}
-                            <tr>
-                                <td>{{value['CTPRVN_NM']}}</td>
-                                <td>{{value['SIGNGU_NM']}}</td>
-                                <td>{{value['ITEM_NM']}}</td>
-                                <td>{{value['TROBL_TY_NM']}}</td>
-                                <td>{{value['CLUB_NM']}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </center>
-            </div>
+
+          </div>
+
+
+
         </div>
+      </div>
+    </div>
+    <!-- excel data print -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body table-responsive p-0">
+            <table id="table-club" class="table table-hover">
+              <th>시/도</th>
+              <th>시군구</th>
+              <th>종목</th>
+              <th>장애유형</th>
+              <th>동호회명</th>
+              <tbody>
+              {% for key, value in club_info.iterrows() %}
+
+              <tr class="cursor-pointer" data-bdid="{{value['CLUB_NM']}}+{{value['OPER_TIME_CN']}}">
+                <td>{{value['CTPRVN_NM']}}</td>
+                <td>{{value['SIGNGU_NM']}}</td>
+                <td>{{value['ITEM_NM']}}</td>
+                <td>{{value['TROBL_TY_NM']}}</td>
+                <td>{{value['CLUB_NM']}}</td>
+              </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="pagination justify-content-center m-3 pt-2 pb-5">
+      {% if start > 1 %}
+      <a title="첫페이지" class="fc-prev-button btn " type="button" aria-label="prev"
+         href="{{ url_for('user_route.club', page=1) }}?{{request.query_string.decode()}}">
+        <span class="hide">첫 페이지</span>
+        <span class="fa fa-chevron-left"></span>
+        <span class="fa fa-chevron-left"></span>
+      </a>
+      {% else %}
+      <a title="첫페이지" class="fc-prev-button btn  disabled" type="button" aria-label="prev">
+        <span class="hide">첫 페이지</span>
+        <span class="fa fa-chevron-left"></span>
+        <span class="fa fa-chevron-left"></span>
+      </a>
+      {% endif %}
+
+      {% if start > 1 %}
+      <a title="이전 10개 페이지" class="fc-prev-button btn " type="button" aria-label="prev"
+         href="{{ url_for('user_route.club', page=start-10) }}?{{request.query_string.decode()}}">
+        <span class="fa fa-chevron-left"></span>
+      </a>
+      {% else %}
+      <a title="이전 10개 페이지" class="fc-prev-button btn  disabled" type="button" aria-label="prev">
+        <span class="fa fa-chevron-left"></span>
+      </a>
+      {% endif %}
+      <div class=pagination>
+        {% for page_num in range(start,last) %}
+        {% if page_num %}
+        {% if page_num != page %}
+        <li class="page-item">
+          <a title="{{page_num}} 페이지" class="page-link"
+             href="{{ url_for('user_route.club', page=page_num) }}?{{request.query_string.decode()}}">{{ page_num }}
+          </a>
+        </li>
+        {% else %}
+        <li class="page-item active">
+          <a title="현재 페이지" class="page-link" href="#">{{ page_num }}</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% if total_page >= last %}
+      <a title="다음 10개 페이지" href="{{ url_for('user_route.club', page=start+10) }}?{{request.query_string.decode()}}"
+         class="fc-next-button btn " type="button" aria-label="next">
+        <span class="hide">다음 10개 페이지</span>
+        <span class="fa fa-chevron-right"></span>
+      </a>
+      {% else %}
+      <a title="다음 10개 페이지" class="fc-next-button btn  disabled" type="button" aria-label="next">
+        <span class="hide">다음 10개 페이지</span>
+        <span class="fa fa-chevron-right"></span>
+      </a>
+      {% endif %}
+
+      {% if total_page > last%}
+      <a title="마지막 페이지" href="{{ url_for('user_route.club', page=total_page) }}?{{request.query_string.decode()}}"
+         class="fc-next-button btn" type="button" aria-label="next">
+        <span class="hide">마지막 페이지</span>
+        <span class="fa fa-chevron-right"></span>
+        <span class="fa fa-chevron-right"></span>
+      </a>
+      {% else %}
+      <a title="마지막 페이지" class="fc-next-button btn disabled" type="button" aria-label="next">
+        <span class="hide">마지막 페이지</span>
+        <span class="fa fa-chevron-right"></span>
+        <span class="fa fa-chevron-right"></span>
+      </a>
+      {% endif %}
+    </ul>
+
+  </section>
+</div>
 
 {% endblock %}
