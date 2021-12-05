@@ -25,4 +25,6 @@ def run():
 
 if __name__ == '__main__':
     #manager.debug = True
+    app.secret_key = 'super secret key'
+    app.config['SESSION_TYPE'] = 'filesystem'
     manager.run()

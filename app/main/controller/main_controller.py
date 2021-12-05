@@ -1,15 +1,24 @@
 import os
-from flask import Blueprint, render_template, redirect, url_for, request, send_from_directory
+from flask import Blueprint, render_template, redirect, url_for, request, send_from_directory, flash, session
 import pandas as pd
 import math
+import numpy as np
+import sqlite3 as sql
+import datetime
+
 user_route = Blueprint('user_route', __name__)
 img_dir = './app/main/static/image/'
 rank = pd.read_csv('./app/main/static/files/rank.csv')
 board = pd.read_csv('./app/main/static/files/board.csv')
 board = board.fillna('')
 facility = pd.read_csv('./app/main/static/files/facility.csv')
+
 @user_route.route('/', methods=['GET', 'POST'])
 def main():
+  if 'userid' in session:
+    current_user = session['userid']
+  else:
+    current_user = None
 
   main_rank = rank.copy()
   main_rank = main_rank.sort_values(by=['DMAND_MVM_ITEM_IDEX_RANK_CO'], ascending=[True]).head(10)
@@ -17,7 +26,74 @@ def main():
   main_board = main_board.loc[[22, 36, 49, 57],['CLUB_NM', 'OPER_TIME_CN', 'CLUB_INTRCN_CN']]
   main_board.index=[1, 2, 3, 4]
   column_list = ['CLUB_NM', 'OPER_TIME_CN', "CLUB_INTRCN_CN"]
-  return render_template('index.html', title="메인", rank=main_rank, board=main_board, column_list=column_list)
+  return render_template('index.html', title="메인", rank=main_rank, board=main_board, column_list=column_list, current_user=current_user)
+
+@user_route.route('/login',methods=['GET', 'POST'])
+def login():
+  if request.method == 'POST':
+    data = request.get_json()
+
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute("select * from user where userId=?",(data['id'],))
+    rows = cur.fetchall()
+    if data['pwd'] == rows[0][1]:
+      response_object = {
+        'status': 'success',
+        'message': 'Successfully save.'
+      }
+      session.clear()
+      session['userid'] = data['id']
+      # print(session['userid'])
+      return response_object, 200
+      con.close()  # db 닫음.
+    else:
+      response_object = {
+        'status': 'fail',
+        'message': '다시 시도해주세요.'
+      }
+      return response_object, 200
+
+  return render_template('login.html')
+
+@user_route.route('/logout',methods=['GET'])
+def logout():
+  session.pop('userid', None)
+  return redirect(url_for('user_route.main'))
+
+@user_route.route('/register',methods=['GET','POST'])
+def register():
+  if request.method == "POST":
+    id = request.form.get('id')
+    pwd = request.form.get('pwd')
+    confirm_pwd = request.form.get('confirm-pwd')
+
+    if pwd != confirm_pwd:
+      flash("비밀번호를 확인해주세요.")
+      return render_template('register.html')
+    else:
+      try:
+        with sql.connect("database.db") as con:
+          # db 입력창에 입력커서 놓기.
+          cur = con.cursor()
+
+          # db에 값 입력. (메모리상 입력o, db에 입력x)
+          cur.execute("INSERT INTO user (userId,userPwd) VALUES (?,?)", (id, pwd))
+
+          con.commit()  # db에 값 저장. (데이터베이스에 입력됨.)
+          msg = "Record successfully added"
+
+      except:
+        con.rollback()
+        msg = "error in insert operation"
+
+      finally:  # try를 하던 except을 하던 finally는 무조건 한번 실행됨.
+        flash("회원가입이 되었습니다.")
+        return redirect('/')  # 파이썬에 있는 msg객체를 result.html에 전달.
+        con.close()  # db 닫음.
+
+  else:
+    return render_template('register.html')
 
 
 @user_route.route('/boards/<string:clubNmTm>', methods=['GET'])
@@ -81,6 +157,115 @@ def club(page=1, start=1):
   club_info = club_info.iloc[(page * 10) - 10:(page * 10) - 1]
 
   return render_template('club.html', title="동호회", club_info=club_info, start=start, last=last, total_page=total_page, page=page)
+
+
+@user_route.route('/board')
+@user_route.route('/board/')
+# @user_route.route('/club/p/<int:page>')
+def club_board():
+  con = sql.connect("database.db")
+  cur = con.cursor()
+
+  if 'userid' in session:
+    current_user = session['userid']
+  else:
+    current_user = None
+
+  ## 검색 부분
+  data = request.args
+  if data:
+
+    keyword = data['search_keyword']
+    cur.execute(
+      'select bdid, bdTitle, substr(insertDate,0,11) as insertDate, category, userId from club_board where (bdContent || bdTitle || userId || category) LIKE ? order by insertDate desc',
+      ('%' +keyword + '%',))
+    club_board = cur.fetchall()
+    # club_board = cur.fetchall()
+
+  else:
+    cur.execute("select bdid, bdTitle, substr(insertDate,0,11) as insertDate, category, userId from club_board order by insertDate desc")
+    club_board = cur.fetchall()
+
+  # print(club_board)
+  return render_template('board.html', current_user=current_user, club_board=club_board)
+
+@user_route.route('/board/upload/',methods=['GET','POST'])
+def upload_board():
+  if request.method == 'POST':
+    data = request.get_json()
+
+    con = sql.connect("database.db")
+    cur = con.cursor()
+
+    try:
+      cur.execute("INSERT INTO club_board (bdTitle,bdContent, insertDate, category, userId) VALUES (?,?,?,?,?)",
+                  (data['title'], data['content'], datetime.datetime.now(), data['type'], session['userid']))
+      con.commit()  # db에 값 저장. (데이터베이스에 입력됨.)
+      response_object = {
+        'status': 'success',
+        'message': 'Successfully save.'
+      }
+
+      return response_object, 200
+      con.close()  # db 닫음.
+    except Exception as e:
+      print(e)
+      response_object = {
+        'status': 'fail',
+        'message': 'club_board Create fail.',
+      }
+      return response_object, 500
+
+  else:
+    club_board = board.copy()
+    club_board = club_board['TROBL_TY_NM']
+    club_board = club_board.drop_duplicates()
+    club_board.replace('', np.nan, inplace=True)
+    club_board = club_board.dropna(axis=0)
+  # print(club_board)
+    return render_template('board_upload.html', club_board=club_board)
+
+@user_route.route('/post/<int:bdid>', methods=['GET','POST'])
+def post(bdid):
+
+  if request.method == 'GET':
+    con = sql.connect("database.db")
+    cur = con.cursor()
+
+    cur.execute("select bdid, bdTitle, bdcontent,substr(insertDate, 0, 11) as insertDate, category, userId from club_board where bdid=?",(bdid,))
+    post = cur.fetchone()
+    cur.execute("select content,substr(insertDate, 0, 11) as insertDate, insertId from comments where bdid=?",(bdid,))
+    post_comments = cur.fetchall()
+
+    con.close()  # db 닫음.
+
+    return render_template('post-detail.html', post=post, current_user=session['userid'], post_comments=post_comments)
+  else:
+    data = request.get_json()
+
+    con = sql.connect("database.db")
+    cur = con.cursor()
+
+    try:
+      cur.execute("INSERT INTO comments (bdid,content, insertDate, insertId) VALUES (?,?,?,?)",
+                  (data['bdid'], data['comment'], datetime.datetime.now(), session['userid']))
+      con.commit()  # db에 값 저장. (데이터베이스에 입력됨.)
+      response_object = {
+        'status': 'success',
+        'message': 'Successfully save.'
+      }
+
+      return response_object, 200
+      con.close()  # db 닫음.
+    except Exception as e:
+      print(e)
+      response_object = {
+        'status': 'fail',
+        'message': 'club_board Create fail.',
+      }
+      return response_object, 500
+
+
 
 
 @user_route.route('/facility',methods=['GET','POST'])

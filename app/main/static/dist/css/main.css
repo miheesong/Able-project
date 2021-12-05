@@ -330,3 +330,48 @@ body {
 .top28 {
   top: 28px;
 }
+
+/*
+자유게시판 글쓰기*/
+.board-wrap {
+  position: relative;
+  display: block;
+  background: #fff;
+}
+.board-header {
+  background: rgb(0, 73, 140) !important;
+  color: #fff !important;
+}
+
+/*자유게시판 글 상세*/
+.post-title {
+  display: inline-block;
+  background: rgb(0, 73, 140);
+  padding: 8px;
+  font-size: medium;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  top: 10px;
+  position: relative;
+}
+.comment-wrap {
+  display: block;
+  border-top: 1px solid #c9caca;
+}
+
+.comments-wrap {
+  display: block;
+  border-top: 1px solid #c9caca;
+}
+.comment-user {
+  color: rgba(0,0,0,.5);
+}
+
+/*메인 로그아웃*/
+.logout {
+  position: absolute;
+  right: 50px;
+  color: rgb(0, 73, 140);
+  font-weight: bold;
+}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content-wrapper flex justify-content-center align-items-center login-container flex-direction-column">
+  <section class="container main-container">
+    <div class="club-page">
+      <div class="current-page">
+        <h2 class="display-5 pl-3">자유 게시판</h2>
+      </div>
+    </div>
+      <!--areaBased-->
+    <div class="row">
+      <div class="col-12 mt-5">
+        <div class="col-md-5 pb-3 float-right">
+          <div class="input-group">
+            <input class="form-control" type="search" name="keyword" placeholder="검색어를 입력하세요">
+            <div class="input-group-append">
+             <button class="btn btn-secondary" id="btn-search-post" type="button">검색</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- excel data print -->
+
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body table-responsive p-0">
+            <table id="table-board" class="table table-hover">
+              <th>번호</th>
+              <th>제목</th>
+              <th>작성자</th>
+              <th>등록일</th>
+              <tbody>
+              {% for board in club_board %}
+
+                <tr class="cursor-pointer" data-bdid="{{board[0]}}">
+                  <td>{{board[0]}}</td>
+                  <td><span class="badge bg-primary mr-3">{{board[3]}}</span>{{board[1]}}</td>
+                  <td>{{board[4]}}</td>
+                  <td>{{board[2]}}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+
+    <div class="col-2 float-right">
+      {% if current_user is not none %}
+        <button type="button" class="btn btn-primary btn-block" onclick="location.href='/board/upload/'">글쓰기</button>
+      {% else %}
+        <button type="button" class="btn btn-primary btn-block" onclick="location.href='/login'">글쓰기</button>
+      {% endif %}
+    </div>
+
+  </section>
+</div>
+
+{% endblock %}

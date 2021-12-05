@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+          alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+<div class="content-wrapper flex justify-content-center align-items-center login-container flex-direction-column">
+  <div class="login-page" style="height: 80vh;">
+    <div class="register-box">
+<!--      <div class="login-logo">-->
+<!--        <b style="color:rgb(0, 73, 140); font-weight: bold;">Able</b>-->
+<!--      </div>-->
+
+      <div class="card">
+        <div class="card-body register-card-body">
+          <p class="login-box-msg">회원가입</p>
+          <form action="/register" method="post">
+            <div class="input-group mb-3">
+              <input type="text" name="id" class="form-control" placeholder="아이디" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="far fa-user"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" name="pwd" class="form-control" placeholder="비밀번호" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" name="confirm-pwd" class="form-control" placeholder="비밀번호 확인" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <button id="register" type="submit" class="btn btn-primary btn-block">회원가입</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

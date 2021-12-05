@@ -3,7 +3,13 @@
 {% block content %}
 
 <meta charset="UTF-8"/>
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+      <script>
+        alert("{{messages[-1]}}")
+      </script>
+  {% endif %}
+{% endwith %}
 <div class="content-wrapper flex justify-content-center align-items-center login-container flex-direction-column">
   <section class="container main-container">
     <div class="row">

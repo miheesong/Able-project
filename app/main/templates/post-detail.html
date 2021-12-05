@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="content-wrapper flex justify-content-center align-items-center login-container flex-direction-column">
+  <section class="container main-container">
+    <div class="main_page pb-5">
+      <div class="current-page">
+        <h2 class="display-5 pl-3">자유게시판</h2>
+      </div>
+      <div class="content-header club_header">
+        <span class="post-title float-left mr-3">{{post[4]}}</span><h4 class="p-3">{{post[1]}}<small class="float-right">{{post[3]}}</small></h4>
+        <span class="pl-3" style="color:rgba(0,0,0,.5);">작성자 | {{post[5]}}</span>
+      </div>
+      <div class="content-detail p-3 pb-5">
+        <h5 class="pt-3 mb-5">{{post[2]}}</h5>
+      </div>
+      <div class="row pb-3">
+        <div class="col-2">
+          {% if current_user is not none %}
+            <button id="btn-comment" type="button" class="btn btn-block btn-outline-secondary float-right"><i class="far fa-comment-dots pr-2"></i>댓글 쓰기</button>
+          {% else %}
+            <button type="button" class="btn btn-block btn-outline-secondary float-right" onclick="location.href='/login'"><i class="far fa-comment-dots pr-2"></i>댓글 쓰기</button>
+          {% endif %}
+        </div>
+      </div>
+      <div id="comment" class="comment-wrap p-3" style="display:none;">
+        <textarea id="comment-content" class="form-control" rows="5" placeholder="댓글을 입력하세요."></textarea>
+        <div class="col-2 float-right pt-3">
+          <button id="btn-post" class="btn btn-block btn-outline-primary">등록</button>
+        </div>
+      </div>
+      {% for comments in post_comments %}
+        <div class="comments-wrap p-3">
+          <p class="comment-user">{{comments[2]}}&emsp;{{comments[1]}}</p>
+          <p>{{comments[0]}}<p>
+        </div>
+      {% endfor %}
+
+
+
+    </div>
+
+  </section>
+</div>
+
+
+{% endblock %}

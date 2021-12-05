@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="row pt-5 " style="justify-content:center" >
+    <div class="col-md-3 mb-4" >
+        <select class="custom-select d-block w-100" id="province" onchange="changeCountry()" required>
+            <option value="sido" selected disabled>시/도</option>
+           {% for value in province %}
+              <option>{{value}}</option>
+      {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-md-3 mb-4">
+        <select class="custom-select d-block w-100" id="country" required disabled >
+            <option value="sigungu" >시/군/구</option>
+            {% for key, value in country.iterrows() %}
+              <option value="{{value['CTPRVN_NM']}}" style="display:none">{{value['SIGNGU_NM']}}</option>
+      {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-1 mb-1">
+        <button id="buttonFacility"; class="btn" style="background:#c9caca;">검색</button>
+    </div>
+</div>
+<div class="col-md-8 card-margin" >
+<div class="card">
+    <div class="card-header" style="background: #c9caca">
+        <h3 class="title text-center">
+            목록
+        </h3>
+    </div>
+    <div class="card-body">
+
+        {% for key, value in list.iterrows() %}
+              <option value="{{value['CTPRVN_NM']}}" style="display:none">{{value['SIGNGU_NM']}}</option>
+        <div>
+            <span style="font-weight:bold">
+                <h4>{{value['FCLTY_NM']}}</h4>
+            </span>
+            <span>
+                <h5>{{value['FCLTY_ROAD_NM_ADDR']}}</h5>
+            </span>
+            <span>
+                {% if value['RPRSNTV_TEL_NO']=='' %}
+                <h6>{{value['RPRSNTV_TEL_NO']}}</h6>SS
+                 {% else %}
+                <h5>☎  {{value['RPRSNTV_TEL_NO']}}</h5>
+                {% endif %}
+            </span>
+        </div>
+        <hr/>
+        {% endfor %}
+    </div>
+</div>
+    </div>
+
+{% endblock %}
+
+
+
