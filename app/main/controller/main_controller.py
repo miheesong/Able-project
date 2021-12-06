@@ -126,6 +126,11 @@ def internal_error(err):
 @user_route.route('/club/')
 @user_route.route('/club/p/<int:page>')
 def club(page=1, start=1):
+  if 'userid' in session:
+    current_user = session['userid']
+  else:
+    current_user = None
+
   club_info = board.copy()
   club_info = club_info[['CTPRVN_NM', 'SIGNGU_NM', 'ITEM_NM', 'TROBL_TY_NM', 'CLUB_NM', 'OPER_TIME_CN']]
   club_info = club_info.fillna("-")
@@ -156,7 +161,7 @@ def club(page=1, start=1):
 
   club_info = club_info.iloc[(page * 10) - 10:(page * 10) - 1]
 
-  return render_template('club.html', title="동호회", club_info=club_info, start=start, last=last, total_page=total_page, page=page)
+  return render_template('club.html', title="동호회", club_info=club_info, start=start, last=last, total_page=total_page, page=page, current_user=current_user)
 
 
 @user_route.route('/board')
@@ -177,13 +182,13 @@ def club_board():
 
     keyword = data['search_keyword']
     cur.execute(
-      'select bdid, bdTitle, substr(insertDate,0,11) as insertDate, category, userId from club_board where (bdContent || bdTitle || userId || category) LIKE ? order by insertDate desc',
+      'select bdid, bdTitle, substr(insertDate,0,11) as date, category, userId from club_board where (bdContent || bdTitle || userId || category) LIKE ? order by insertDate desc',
       ('%' +keyword + '%',))
     club_board = cur.fetchall()
     # club_board = cur.fetchall()
 
   else:
-    cur.execute("select bdid, bdTitle, substr(insertDate,0,11) as insertDate, category, userId from club_board order by insertDate desc")
+    cur.execute("select bdid, bdTitle, substr(insertDate,0,11) as date, category, userId from club_board order by insertDate desc")
     club_board = cur.fetchall()
 
   # print(club_board)
@@ -267,6 +272,11 @@ def post(bdid):
 
 @user_route.route('/facility',methods=['GET'])
 def find_facility():
+  if 'userid' in session:
+    current_user = session['userid']
+  else:
+    current_user = None
+
   # 검색부분 select
   data = pd.read_csv('./app/main/static/files/facility.csv')
   data = data.fillna(0)
@@ -306,13 +316,18 @@ def find_facility():
   list = list.join((phone)) #데이터 프레임끼리 열병합
   list = list.sort_values(by='FCLTY_NM')
 
-  return render_template('facility.html', province=province, country=country, list=list)
+  return render_template('facility.html', province=province, country=country, list=list, current_user=current_user)
 
 
 
 
 @user_route.route('/facility/list', methods=['GET'])
 def search_facility():
+  if 'userid' in session:
+    current_user = session['userid']
+  else:
+    current_user = None
+
   data = pd.read_csv('./app/main/static/files/facility.csv')
   data = data.fillna(0)
   country = data[['CTPRVN_NM', 'SIGNGU_NM']]
@@ -361,7 +376,7 @@ def search_facility():
     list = list[condi]
 
 
-  return render_template('facility.html', province=province, country=country, list=list)
+  return render_template('facility.html', province=province, country=country, list=list, current_user=current_user)
 
 
 
