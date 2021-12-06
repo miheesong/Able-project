@@ -265,10 +265,7 @@ def post(bdid):
       }
       return response_object, 500
 
-
-
-
-@user_route.route('/facility',methods=['GET','POST'])
+@user_route.route('/facility',methods=['GET'])
 def find_facility():
   # 검색부분 select
   data = pd.read_csv('./app/main/static/files/facility.csv')
@@ -292,7 +289,7 @@ def find_facility():
 
   #print(phone.head(200))
   i = 0
-  for i in range(0,len(phone)):
+  for i in range(0, len(phone)):
     phone.iloc[i] = str(phone.iloc[i])
 
     if(phone.iloc[i] !='0'):
@@ -302,18 +299,71 @@ def find_facility():
 
   phone = pd.DataFrame(phone, columns=['RPRSNTV_TEL_NO']);
 
-  #print(phone)
+  print(phone)
   #목록 뿌려주기
 
-  list = data[['FCLTY_NM','FCLTY_ROAD_NM_ADDR','CTPRVN_NM', 'SIGNGU_NM']]
+  list = data[['FCLTY_NM','FCLTY_ROAD_NM_ADDR','CTPRVN_NM', 'SIGNGU_NM', 'FCLTY_CRDNT_LO', 'FCLTY_CRDNT_LA']]
   list = list.join((phone)) #데이터 프레임끼리 열병합
   list = list.sort_values(by='FCLTY_NM')
-  #print(list)
-
-  if request.method == "POST":
-    sidogungu = request.get_json()
-    list = list[(list['CTPRVN_NM'] == sidogungu['sido']) & (list['SIGNGU_NM'] == sidogungu['sigungu'])]
-    print(list)
-    return "dddd"
 
   return render_template('facility.html', province=province, country=country, list=list)
+
+
+
+
+@user_route.route('/facility/list', methods=['GET'])
+def search_facility():
+  data = pd.read_csv('./app/main/static/files/facility.csv')
+  data = data.fillna(0)
+  country = data[['CTPRVN_NM', 'SIGNGU_NM']]
+  country = country.drop_duplicates(subset=['SIGNGU_NM', 'CTPRVN_NM'], keep='first')
+
+  province = data.drop_duplicates(subset=['CTPRVN_NM'], keep='first')
+  province = province['CTPRVN_NM'].sort_values()
+
+  # print(pd.DataFrame(country))
+
+
+  # 폰 앞자리 0으로 채워주기
+  phone = data['RPRSNTV_TEL_NO'].astype('int64')  # int32는 자리수size가 10까지밖에 안됨
+
+  i = 0
+  for i in range(0, len(phone)):
+    phone.iloc[i] = str(phone.iloc[i])
+    if (phone.iloc[i] != '0'):
+      phone.iloc[i] = phone.iloc[i].zfill(len(phone.iloc[i]) + 1)
+    else:
+      phone.iloc[i] = ''
+
+  phone = pd.DataFrame(phone, columns=['RPRSNTV_TEL_NO']);
+
+  # 목록 뿌려주기
+  list = data[['FCLTY_NM', 'FCLTY_ROAD_NM_ADDR', 'CTPRVN_NM', 'SIGNGU_NM', 'FCLTY_CRDNT_LO', 'FCLTY_CRDNT_LA']]
+  list = list.join((phone))  # 데이터 프레임끼리 열병합
+  list = list.sort_values(by='FCLTY_NM')
+  # print(list)
+
+  get_data = request.args
+  print(get_data)
+
+  search_facility = False
+  conta1, conta2 = True, True
+
+  if 'sido' in get_data:
+    conta1 = list['CTPRVN_NM'].str.contains(get_data['sido'])
+    search_facility = True
+  if 'sigungu' in get_data:
+    conta2 = list['SIGNGU_NM'].str.contains(get_data['sigungu'])
+    search_facility = True
+
+  if search_facility:
+    condi = conta1 & conta2
+    list = list[condi]
+
+
+  return render_template('facility.html', province=province, country=country, list=list)
+
+
+
+
+

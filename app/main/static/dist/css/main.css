@@ -375,3 +375,76 @@ body {
   color: rgb(0, 73, 140);
   font-weight: bold;
 }
+.board1_image {
+  position:relative;
+  transition: all 0.2s linear;
+}
+
+.hover_text{
+  position:absolute;
+  top:40px;
+  left:10px;
+  font-size: 23px;
+ }
+ .board1_image:hover> .hover_text{
+   display:block;
+   opacity: 1;
+}
+.board1_image:hover img{
+  transform: scale(1.1);
+  filter: brightness(50%);
+}
+.board1_image:after,.hover_text{
+  display:none;
+}
+
+
+ .board2_image:hover> .hover_text{
+   display:block;
+   opacity: 1;
+}
+.board2_image {
+  position:relative;
+  transition: all 0.2s linear;
+}
+.board2_image:hover img{
+  transform: scale(1.1);
+  filter: brightness(50%);
+}
+
+ .board3_image:hover> .hover_text{
+   display:block;
+   opacity: 1;
+}
+.board3_image {
+  position:relative;
+  transition: all 0.2s linear;
+}
+.board3_image:hover img{
+  transform: scale(1.1);
+  filter: brightness(50%);
+}
+
+
+ .board4_image:hover> .hover_text{
+   display:block;
+   opacity: 1;
+}
+.board4_image {
+  position:relative;
+  transition: all 0.2s linear;
+}
+.board4_image:hover img{
+  transform: scale(1.1);
+  filter: brightness(50%);
+}
+
+
+.box11{
+
+		border: 3px solid #fff;
+		margin-bottom: 20px;
+		border-radius: 40%;
+		font-weight: bold;
+
+}
