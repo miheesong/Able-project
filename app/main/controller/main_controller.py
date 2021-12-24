@@ -19,7 +19,7 @@ def main():
     current_user = session['userid']
   else:
     current_user = None
-
+  
   main_rank = rank.copy()
   main_rank = main_rank.sort_values(by=['DMAND_MVM_ITEM_IDEX_RANK_CO'], ascending=[True]).head(10)
   main_board = board.copy()
